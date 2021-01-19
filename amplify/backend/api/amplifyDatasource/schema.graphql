@@ -1,0 +1,17 @@
+type User
+    @model
+    @auth(rules: [{allow: owner, operations: [create, delete, update] } ] ) {
+
+    id: ID!
+    name: String
+    message: [Message] @connection(name: "UserMessages")
+}
+
+type Message
+    @model {
+    id: ID!
+    content: String
+    date: AWSDateTime
+    user: User @connection(name: "UserMessages")
+}
+
